@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:v_wash/mainpage.dart';
+import 'package:v_wash/shoppingcart/cart.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 
 class DetailsPage extends StatefulWidget {
   final heroTag;
@@ -235,11 +238,41 @@ class _DetailsPageState extends State<DetailsPage> {
                                 bottomRight: Radius.circular(25.0)),
                             color: Colors.black),
                         height: 50.0,
-                        child: Center(
-                          child: Text('Add To Cart',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Montserrat')),
+                        child: InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AssetGiffyDialog(
+                                      image: Image.asset(
+                                        'images/tenor.gif',
+                                        fit: BoxFit.cover,
+                                      ),
+                                      title: Text(
+                                        'Hurray!',
+                                        style: TextStyle(
+                                            fontSize: 22.0,
+                                            color: Colors.black),
+                                      ),
+                                      description: Text(
+                                        'Successfully Added to Cart Add More',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      onOkButtonPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AllDetails()));
+                                      },
+                                      buttonOkColor: Colors.blue,
+                                    ));
+                          },
+                          child: Center(
+                            child: Text('Add To Cart',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Montserrat')),
+                          ),
                         ),
                       ),
                     )
